@@ -1,0 +1,10 @@
+.cells {
+  height: 5px;
+  width: 5px;
+  border-color: black;
+  border-style: solid;
+}
+
+body {
+  background-color: grey;
+}
