@@ -9,16 +9,17 @@ const gameState = {
   snakeBody: [],
   fruit: [],
   unaddedSnake: [],
-  snakeDirection: '',
+  snakeDirection: WEST,
   score: 0,
   gameOver: false,
   inputDirection: WEST,
+  state: 0,
 };
 const gameSettings = {
   speed: 100,
-  field_color: 'grey',
-  snake_color: 'black',
-  fruit_color: 'red',
+  field_color: '#808080',
+  snake_color: '#FFFF',
+  fruit_color: '#ff0000',
   fieldSize: 48,
   startLength: 6,
 };

@@ -14,6 +14,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      highScore: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
       settings: {
         allowNull: false,
         type: Sequelize.JSON,
@@ -25,14 +29,14 @@ module.exports = {
       //   type: Sequelize.STRING,
       // },
       // high_score: {
-      //   type: Sequelize.INTERGER,
+      //   type: Sequelize.INTEGER,
       //   defaultValue: 0,
       // },
       // field_size: {
-      //   type: Sequelize.INTERGER,
+      //   type: Sequelize.INTEGER,
       // },
       // snake_speed: {
-      //   type: Sequelize.INTERGER,
+      //   type: Sequelize.INTEGER,
       // },
       // created_at and updated_at are required
       created_at: {
@@ -49,7 +53,8 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.STRING,
+        autoIncreament: true,
+        type: Sequelize.INTEGER,
       },
       name: {
         type: Sequelize.STRING,

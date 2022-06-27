@@ -1,6 +1,7 @@
 # File that sometimes appears on MacOS
 .DS_Store
 .env
-
+# webpack dist folder
+dist/
 # Dependency directories
 node_modules/

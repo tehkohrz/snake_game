@@ -13,6 +13,10 @@ export default function initUserModel(sequelize, DataTypes) {
       allowNull: false,
       type: DataTypes.STRING,
     },
+    highScore: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
     settings: {
       allowNull: false,
       type: DataTypes.JSON,

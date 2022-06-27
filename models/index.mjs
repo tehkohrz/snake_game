@@ -32,4 +32,7 @@ const db = {
   Sequelize,
 };
 
+db.User.hasMany(db.Score);
+db.Score.belongsTo(db.User);
+
 export default db;

@@ -2,7 +2,14 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
 
+// PROCESS ENV Setup
+import dotenv from 'dotenv';
+import path from 'path';
+// Routehandlers
 import bindRoutes from './routes.mjs';
+
+const envPath = '.env';
+dotenv.config({ path: path.normalize(envPath) });
 
 // Initialise Express instance
 const app = express();
@@ -15,13 +22,13 @@ app.use(express.urlencoded({ extended: false }));
 // Bind method override middleware to parse PUT and DELETE requests sent as POST requests
 app.use(methodOverride('_method'));
 // Expose the files stored in the public folder
-app.use(express.static('public'));
-// body parser
+app.use(express.static('dist'));
+// Body parser
 app.use(express.json());
 
 // Bind route definitions to the Express application
 bindRoutes(app);
 
 // Set Express to listen on the given port
-const PORT = process.env.PORT || 3004;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT);

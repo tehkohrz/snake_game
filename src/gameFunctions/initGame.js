@@ -1,10 +1,13 @@
 // Imports
-import GAME from './configVariables';
+import GAME from '../configVariables';
+import { generateFruit } from './fruitsFunctions';
 import handlers from './gameHandlers';
+import { initSettingsModal } from '../systemFunctions/menuFunction';
 
 // create the grid for the play field
 function createField(fieldSize) {
   const field = document.createElement('table');
+  field.id = 'field';
   for (let j = 0; j < fieldSize; j += 1) {
     const row = document.createElement('tr');
     row.id = `row${j}`;
@@ -16,15 +19,18 @@ function createField(fieldSize) {
     }
     field.appendChild(row);
   }
-  document.body.appendChild(field);
+  document.getElementById('main').appendChild(field);
   // Test start button and stop button
+  const buttonContainer = document.createElement('div');
+  buttonContainer.id = 'buttonContainer';
+  document.getElementById('main').appendChild(buttonContainer);
   const start = document.createElement('button');
   start.addEventListener('click', handlers.startGameHandler);
-  document.body.appendChild(start);
+  buttonContainer.appendChild(start);
   start.innerText = 'START';
   const stop = document.createElement('button');
   stop.addEventListener('click', handlers.stopGameHandler);
-  document.body.appendChild(stop);
+  buttonContainer.appendChild(stop);
   stop.innerText = 'STOP';
   // Add event listeners for controls
   document.body.onkeyup = handlers.snakeControlHandler;
@@ -43,13 +49,14 @@ function initSnake(length, fieldSize) {
     const cell = document.getElementById(`X${body[0]}Y${body[1]}`);
     cell.style.backgroundColor = GAME.gameSettings.snake_color;
   });
-  GAME.gameState.snakeBody = [...snake];
   console.log('Snake body formed');
+  return [...snake];
 }
 
 // INITIALISE THE GAME with default settings
-function initGame(fieldSize, startLength) {
-  createField(fieldSize);
-  initSnake(startLength, fieldSize);
+export default function initGame() {
+  // Render the game
+  createField(GAME.gameSettings.fieldSize);
+  GAME.gameState.snakeBody = initSnake(GAME.gameSettings.startLength, GAME.gameSettings.fieldSize);
+  GAME.gameState.fruit = generateFruit(GAME.gameSettings.fieldSize, GAME.gameState.snakeBody);
 }
-initGame(GAME.gameSettings.fieldSize, GAME.gameSettings.startLength);

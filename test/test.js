@@ -16,7 +16,7 @@ let gameState = {
   gameOver: false,
 };
 const gameSettings = {
-  speed: 100,
+  speed: 50,
   field_color: 'grey',
   snake_color: 'black',
   fruit_color: 'red',
@@ -254,11 +254,6 @@ function gameOverCheck(snakeBody, fieldSize) {
   // todo: ADD OVERFLOW CONDITION FOR WALL CHECK
   const wall = wallCollisionCheck(snakeBody[0], fieldSize);
   const body = bodyCollisionCheck(snakeBody);
-  console.log({
-    wall,
-  }, {
-    body,
-  });
   if (wall === true || body === true) {
     return true;
   }

@@ -2,8 +2,9 @@ export default function initScoreModel(sequelize, DataTypes) {
   return sequelize.define('score', {
     id: {
       allowNull: false,
+      autoIncement: true,
       primaryKey: true,
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     name: {
       type: DataTypes.STRING,

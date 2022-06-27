@@ -1,4 +1,4 @@
-import GAME from './configVariables';
+import GAME from '../configVariables';
 
 // SNAKE FUNCTIONS
 // @param {array} snakeHead
@@ -48,6 +48,7 @@ export function moveSnake(gameState, settings) {
     snakeBody.pop();
   }
   snakeDirection = inputDirection;
+
   // move head according to current direction and insert to the front of the array
   snakeBody.unshift(shiftNewHead(snakeBody[0], snakeDirection));
   // Check for gameOver conditions
@@ -59,6 +60,7 @@ export function moveSnake(gameState, settings) {
     const snakeHeadElement = document.getElementById(`X${snakeBody[0][0]}Y${snakeBody[0][1]}`);
     snakeHeadElement.style.backgroundColor = settings.snake_color;
   }
+  // ! This part is damn thrash, if you add anything into config you have to update this
   const newGameState = {
     unaddedSnake,
     snakeBody,
@@ -67,38 +69,37 @@ export function moveSnake(gameState, settings) {
     fruit: gameState.fruit,
     score: gameState.score,
     inputDirection: gameState.inputDirection,
+    state: gameState.state,
   };
   return newGameState;
 }
 
-// Snake controls
+// Snake controls - Direction is locked based of last snake direction so that you cannot uturn
 export function snakeControl(inputKey, snakeDirection) {
-  let inputDirection;
   // arrow up 38, W 87
   if (inputKey === 38 || inputKey === 87) {
     if (snakeDirection === GAME.WEST || snakeDirection === GAME.EAST) {
-      inputDirection = GAME.NORTH;
+      GAME.gameState.inputDirection = GAME.NORTH;
     }
   }
   // arrow down 39, S 83
   if (inputKey === 40 || inputKey === 83) {
     if (snakeDirection === GAME.WEST || snakeDirection === GAME.EAST) {
-      inputDirection = GAME.SOUTH;
+      GAME.gameState.inputDirection = GAME.SOUTH;
     }
   }
   // arrow right 87, D 68
   if (inputKey === 39 || inputKey === 68) {
     if (snakeDirection === GAME.NORTH || snakeDirection === GAME.SOUTH) {
-      inputDirection = GAME.EAST;
+      GAME.gameState.inputDirection = GAME.EAST;
     }
   }
   // arrow left 40, A 65
   if (inputKey === 37 || inputKey === 65) {
     if (snakeDirection === GAME.NORTH || snakeDirection === GAME.SOUTH) {
-      inputDirection = GAME.WEST;
+      GAME.gameState.inputDirection = GAME.WEST;
     }
   }
-  return inputDirection;
 }
 
 // Changes the snake for death

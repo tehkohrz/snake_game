@@ -1,4 +1,4 @@
-import GAME from './configVariables';
+import GAME from '../configVariables';
 
 // FRUIT GENERATOR
 export function generateFruit(fieldSize, snakeBody) {
