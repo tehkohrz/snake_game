@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      highScore: {
+      high_score: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
@@ -53,7 +53,7 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        autoIncreament: true,
+        autoIncrement: true,
         type: Sequelize.INTEGER,
       },
       name: {

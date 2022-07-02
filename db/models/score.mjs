@@ -2,7 +2,7 @@ export default function initScoreModel(sequelize, DataTypes) {
   return sequelize.define('score', {
     id: {
       allowNull: false,
-      autoIncement: true,
+      autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
     },

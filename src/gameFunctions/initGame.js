@@ -1,8 +1,9 @@
 // Imports
 import GAME from '../configVariables';
-import { generateFruit } from './fruitsFunctions';
+import {
+  generateFruit,
+} from './fruitsFunctions';
 import handlers from './gameHandlers';
-import { initSettingsModal } from '../systemFunctions/menuFunction';
 
 // create the grid for the play field
 function createField(fieldSize) {
@@ -25,15 +26,15 @@ function createField(fieldSize) {
   buttonContainer.id = 'buttonContainer';
   document.getElementById('main').appendChild(buttonContainer);
   const start = document.createElement('button');
+  start.classList = 'btn btn-primary';
   start.addEventListener('click', handlers.startGameHandler);
   buttonContainer.appendChild(start);
   start.innerText = 'START';
   const stop = document.createElement('button');
+  stop.classList = 'btn btn-primary';
   stop.addEventListener('click', handlers.stopGameHandler);
   buttonContainer.appendChild(stop);
   stop.innerText = 'STOP';
-  // Add event listeners for controls
-  document.body.onkeyup = handlers.snakeControlHandler;
 }
 
 // init the snake and start the location
@@ -49,14 +50,40 @@ function initSnake(length, fieldSize) {
     const cell = document.getElementById(`X${body[0]}Y${body[1]}`);
     cell.style.backgroundColor = GAME.gameSettings.snake_color;
   });
-  console.log('Snake body formed');
   return [...snake];
+}
+
+// Eventlistener tagged to the id = resetButton
+function resetGame() {
+  console.log('resetting');
+  // Reset the gameState
+  GAME.gameState.state = 0;
+  GAME.gameState.score = 0;
+  GAME.gameState.inputDirection = GAME.WEST;
+  GAME.gameState.snakeDirection = GAME.WEST;
+  GAME.gameState.gameOver = false;
+  GAME.gameState.snakeBody = [];
+  GAME.gameState.unaddedSnake = [];
+  GAME.gameState.fruit = [];
+  // Remove and re-render game
+  document.getElementById('main').innerHTML = '';
+  // Recreate game
+  createField(GAME.gameSettings.fieldSize);
+  GAME.gameState.snakeBody = initSnake(GAME.gameSettings.startLength, GAME.gameSettings.fieldSize);
+  GAME.gameState.fruit = generateFruit(GAME.gameSettings.fieldSize, GAME.gameState.snakeBody, GAME.gameSettings.fruit_color);
+  // Dismiss overlay
+  const overlay = document.getElementById('gameOverOverlay');
+  overlay.style.display = 'none';
 }
 
 // INITIALISE THE GAME with default settings
 export default function initGame() {
   // Render the game
   createField(GAME.gameSettings.fieldSize);
+  // Add event listeners for controls
+  document.body.onkeyup = handlers.snakeControlHandler;
+  document.getElementById('resetButton').addEventListener('click', resetGame);
+  // Render start positions
   GAME.gameState.snakeBody = initSnake(GAME.gameSettings.startLength, GAME.gameSettings.fieldSize);
-  GAME.gameState.fruit = generateFruit(GAME.gameSettings.fieldSize, GAME.gameState.snakeBody);
+  GAME.gameState.fruit = generateFruit(GAME.gameSettings.fieldSize, GAME.gameState.snakeBody, GAME.gameSettings.fruit_color);
 }

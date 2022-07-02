@@ -15,11 +15,12 @@ const gameState = {
   inputDirection: WEST,
   state: 0,
 };
+
 const gameSettings = {
-  speed: 100,
+  speed: 50,
   field_color: '#808080',
-  snake_color: '#FFFF',
-  fruit_color: '#ff0000',
+  snake_color: '#000000',
+  fruit_color: '#FF0000',
   fieldSize: 48,
   startLength: 6,
 };

@@ -1,6 +1,7 @@
 import GAME from '../configVariables';
 
 // Check for valid hex code
+// Returns false for not hexcode
 function checkHex(str) {
   // Check for first char #
   if (str[0] != '#') { return false; }
@@ -19,7 +20,7 @@ function checkHex(str) {
 function checkColorSettings(event) {
   const valid = checkHex(event.target.value);
   // if valid color update preview
-  if (!valid) {
+  if (valid) {
     document.getElementById(`${event.target.id}_preview`).style.backgroundColor = event.target.value;
   } else {
     // Reset to old settings

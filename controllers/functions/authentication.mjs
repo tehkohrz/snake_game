@@ -1,20 +1,19 @@
 import jsSHA from 'jssha';
 import dotenv from 'dotenv';
 import path from 'path';
-import { get } from 'https';
 
 const envPath = '../../.env';
 dotenv.config({ path: path.normalize(envPath) });
 const SALT = process.env.SECRETSALT;
 
-export function getHash(unHashedString) {
+function getHash(unHashedString) {
   const shaObj = new jsSHA('SHA-512', 'TEXT', { encoding: 'UTF8' });
   shaObj.update(`${unHashedString}`);
   const hashed = shaObj.getHash('HEX');
   return hashed;
 }
 
-export function getSessionHash(userName) {
+function getSessionHash(userName) {
   const shaObj = new jsSHA('SHA-512', 'TEXT', { encoding: 'UTF8' });
   const sessionString = userName + SALT;
   shaObj.update(`${sessionString}`);
@@ -22,10 +21,12 @@ export function getSessionHash(userName) {
   return sessionHash;
 }
 
-export function checkHash(input, storedValue) {
+function checkHash(input, storedValue) {
   const hashedInput = getHash(input);
   if (hashedInput === storedValue) {
     return true;
   }
   return false;
 }
+
+export default { checkHash, getHash, getSessionHash };

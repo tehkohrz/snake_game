@@ -32,7 +32,8 @@ const db = {
   Sequelize,
 };
 
-db.User.hasMany(db.Score);
-db.Score.belongsTo(db.User);
+// There is no relation for the db
+// db.User.hasMany(db.Score);
+// db.Score.belongsTo(db.User);
 
 export default db;

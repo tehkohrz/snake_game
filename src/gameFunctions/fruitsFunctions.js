@@ -1,7 +1,5 @@
-import GAME from '../configVariables';
-
 // FRUIT GENERATOR
-export function generateFruit(fieldSize, snakeBody) {
+export function generateFruit(fieldSize, snakeBody, fruitColor) {
   let fruitLocation = [];
   let validLocation = false;
   // generate random locations for fruit until the location is not the same as existing snake body
@@ -25,7 +23,7 @@ export function generateFruit(fieldSize, snakeBody) {
   }
   // Render the fruit out
   const fruit = document.getElementById(`X${fruitLocation[0]}Y${fruitLocation[1]}`);
-  fruit.style.backgroundColor = GAME.gameSettings.fruit_color;
+  fruit.style.backgroundColor = fruitColor;
   return fruitLocation;
 }
 
@@ -35,7 +33,10 @@ export function fruitCheck(state) {
   if (state.snakeBody[0][0] === state.fruit[0] && state.snakeBody[0][1] === state.fruit[1]) {
     // Push the fruit location to add the extra length from this location onwards
     state.unaddedSnake.push([state.fruit[0], state.fruit[1]]);
+    // increase score
     state.score += 10;
+    // Render score into scoreboard
+    document.getElementById('score').innerText = state.score;
     return true;
   }
   return false;

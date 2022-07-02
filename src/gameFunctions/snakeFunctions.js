@@ -54,7 +54,9 @@ export function moveSnake(gameState, settings) {
   // Check for gameOver conditions
   gameOver = gameOverCheck(snakeBody, settings.fieldSize);
   if (gameOver) {
+    // GameOver render change in snake color
     snakeDeath(snakeBody);
+    gameState.state = -1;
   } else {
     // not gameOver move snakeHead if not will throw error
     const snakeHeadElement = document.getElementById(`X${snakeBody[0][0]}Y${snakeBody[0][1]}`);
@@ -110,9 +112,6 @@ function snakeDeath(snakeBody) {
     const partElement = document.getElementById(`X${part[0]}Y${part[1]}`);
     partElement.style.backgroundColor = 'red';
   });
-  // Stop game movement
-  clearInterval(GAME.gameInstance);
-  console.log('GAMEOVER');
 }
 
 // Collision check with the snake body to end the game
