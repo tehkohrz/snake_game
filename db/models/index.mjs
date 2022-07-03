@@ -12,6 +12,7 @@ const env = process.env.NODE_ENV || 'development';
 // this is the same as saying :
 // const config = allConfig['development']
 const config = allConfig[env];
+let sequelize;
 
 // If env is production, retrieve database auth details from the
 // DATABASE_URL env var that Heroku provides us
@@ -28,14 +29,16 @@ if (env === 'production') {
   config.port = port;
   sequelize = new Sequelize(dbName, username, password, config);
 }
-
-const sequelize = new Sequelize(
-// database settings from config.js
-  config.database,
-  config.username,
-  config.password,
-  config,
-);
+// Not production
+else {
+  sequelize = new Sequelize(
+    // database settings from config.js
+    config.database,
+    config.username,
+    config.password,
+    config,
+  );
+}
 
 // initiate models and instances
 const db = {
