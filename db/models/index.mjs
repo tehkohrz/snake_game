@@ -1,6 +1,6 @@
 import sequelizePackage from 'sequelize';
 // we give the name allConfig to what we're importing from config.js, i.e, our database settings
-import allConfig from '../config/config.js';
+import allConfig from '../../sequelize.config.cjs';
 
 import initUserModel from './user.mjs';
 import initScoreModel from './score.mjs';
