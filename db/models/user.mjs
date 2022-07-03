@@ -3,6 +3,7 @@ export default function initUserModel(sequelize, DataTypes) {
     id: {
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
       type: DataTypes.STRING,
     },
     name: {

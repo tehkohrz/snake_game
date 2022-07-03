@@ -1,6 +1,3 @@
-import {
-  v4 as uuidv4,
-} from 'uuid';
 import auth from './functions/authentication.mjs';
 
 export default class InitUserController {
@@ -12,8 +9,6 @@ export default class InitUserController {
   signUp = async (req, res) => {
     try {
       const database = this.db;
-      // Generate UUID
-      const id = uuidv4();
       // Hash password for storage
       const password = auth.getHash(req.body.password);
       // Retrieve current userSettings as an object and store
