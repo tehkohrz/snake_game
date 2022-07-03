@@ -1,7 +1,7 @@
 import sequelizePackage from 'sequelize';
 // we give the name allConfig to what we're importing from config.js, i.e, our database settings
+import url from 'url';
 import allConfig from '../../sequelize.config.cjs';
-
 import initUserModel from './user.mjs';
 import initScoreModel from './score.mjs';
 
@@ -18,7 +18,7 @@ const config = allConfig[env];
 if (env === 'production') {
   // Break apart the Heroku database url and rebuild the configs we need
   const { DATABASE_URL } = process.env;
-  const dbUrl = url.parse(process.env.DATABASE_URL);
+  const dbUrl = url.parse(DATABASE_URL);
   const username = dbUrl.auth.substr(0, dbUrl.auth.indexOf(':'));
   const password = dbUrl.auth.substr(dbUrl.auth.indexOf(':') + 1, dbUrl.auth.length);
   const dbName = dbUrl.path.slice(1);
