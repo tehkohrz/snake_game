@@ -1,3 +1,7 @@
+// import HtmlWebpackPlugin from 'html-webpack-plugin';
+// import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+// import path, { dirname } from 'path';
+
 // // webpack.config.js
 // const path = require('path');
 
@@ -47,7 +51,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
-    new MiniCssExtractPlugin()],
+  ],
   module: {
     rules: [
       {
@@ -58,8 +62,8 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

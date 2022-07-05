@@ -24,7 +24,6 @@ export default class InitUserController {
       }
       // Create user entry
       const newUser = await database.User.create({
-        id,
         name: req.body.username,
         password,
         highScore: 0,
