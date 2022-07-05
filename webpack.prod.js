@@ -12,7 +12,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
-    new MiniCssExtractPlugin()],
+  ],
   module: {
     rules: [
       {
@@ -23,8 +23,8 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader'],
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
